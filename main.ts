@@ -1,4 +1,12 @@
-let a = 5;
-let b = 5;
-let c = a + b;
-console.log(c);
+const API_URL = "https://icanhazdadjoke.com/";
+
+function mostrarAcudit() {
+
+    fetch('https://icanhazdadjoke.com/', { 
+        headers: {
+            'Accept': 'application/json'
+        }})
+        .then(response => response.json())
+        .then(json => console.log(json));
+
+}

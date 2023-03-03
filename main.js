@@ -1,4 +1,10 @@
-var a = 5;
-var b = 5;
-var c = a + b;
-console.log(c);
+var API_URL = "https://icanhazdadjoke.com/";
+function mostrarAcudit() {
+    fetch('https://icanhazdadjoke.com/', {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(function (response) { return response.json(); })
+        .then(function (json) { return console.log(json); });
+}
