@@ -1,0 +1,38 @@
+body {
+
+    background-color: #B3EADE;
+
+}
+
+section {
+
+    margin:auto;
+    margin-top: 12%;
+    text-align: center;
+    padding: 70px;
+    width: 600px;
+    height: 200px;
+    background-color: #e2edea;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #81a9a0;
+}
+
+h1 {
+    text-align: center;
+}
+
+#contenido_acudit {
+
+    height: 80px;
+}
+
+button {
+
+    z-index: 2;
+    border: 0;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgb(216, 221, 95);
+    font-weight: 600;
+    
+}
