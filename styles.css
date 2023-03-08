@@ -17,6 +17,13 @@ section {
     box-shadow: 0px 0px 10px #81a9a0;
 }
 
+#weather {
+
+    position:absolute;
+    top:5px;
+    left:15px;
+}
+
 h1 {
     text-align: center;
 }

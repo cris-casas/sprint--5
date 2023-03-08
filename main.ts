@@ -1,3 +1,20 @@
+
+const lat = 41.390205;
+const lon = 2.154007; 
+const API_key = '3356a3346fdf41242690eef93099bd6f';
+const climaApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`;
+
+const contClima:any = document.getElementById('clima');
+
+const mostraClima = async () => {
+    const respuesta = await fetch(climaApi);
+    const datos = await respuesta.json();
+    contClima.innerHTML = datos.weather[0].description;
+    console.log(datos);
+}
+
+mostraClima();
+
 const apiUrl:string = 'https://icanhazdadjoke.com/';
 const option:any = {
     headers: {
@@ -18,7 +35,7 @@ async function dadesApi () {
         if(respuesta.status === 200){
             const datos = await respuesta.json();
             contAcud.innerHTML = datos.joke;
-            contScore.innerHTML=
+            contScore.innerHTML =
             '<button onclick="rate(1)">1</button>'+
             '<button onclick="rate(2)">2</button>'+
             '<button onclick="rate(3)">3</button>';
@@ -61,61 +78,3 @@ function generaAcudit () {
     dadesApi();
     
 }
-
-
-
-
-/* 
-function rate (score) {
-
-    // Recollim la data en format ISO
-    const d = new Date()
-    let fecha:any = d.toISOString() 
-
-    // Creem l'objecte acudit
-    let acudit:any = {
-        joke: contAcud.innerHTML,
-        score:  score,
-        date: fecha
-    }
-    
-    // Guardem l'objecte a l'array y es mostra
-    reportAcudits.push(acudit);
-    console.log(reportAcudits)
-
-}
-*/
-
-/*
-const API_URL = "https://icanhazdadjoke.com/";
-
-function mostrarAcudit() {
-
-    fetch('https://icanhazdadjoke.com/', { 
-        headers: {
-            'Accept': 'application/json'
-        }})
-        .then(response => response.json())
-        .then(json => console.log(json));
-
-}
-*/
-
-/*
-const apiUrl:string = 'https://icanhazdadjoke.com/';
-let contAcud:any = document.getElementById('contenido_acudit');
-const option:any = {
-    
-    headers: {
-    'Accept': 'application/json'
-    }
-}
-
-function mostraAcudit() {
-
-    const accion = fetch(apiUrl, option)
-        .then((response) => response.json())
-        .then((data) => contAcud.innerHTML=data.joke);
-
-}
-*/

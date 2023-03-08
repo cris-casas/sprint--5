@@ -34,6 +34,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
+var lat = 41.390205;
+var lon = 2.154007;
+var API_key = '3356a3346fdf41242690eef93099bd6f';
+var climaApi = "https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lon, "&appid=").concat(API_key);
+var contClima = document.getElementById('clima');
+var mostraClima = function () { return __awaiter(_this, void 0, void 0, function () {
+    var respuesta, datos;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, fetch(climaApi)];
+            case 1:
+                respuesta = _a.sent();
+                return [4 /*yield*/, respuesta.json()];
+            case 2:
+                datos = _a.sent();
+                contClima.innerHTML = datos.weather[0].description;
+                console.log(datos);
+                return [2 /*return*/];
+        }
+    });
+}); };
+mostraClima();
 var apiUrl = 'https://icanhazdadjoke.com/';
 var option = {
     headers: {
@@ -101,55 +124,3 @@ function generaAcudit() {
     // Recollim i mostrem els acudits de la API
     dadesApi();
 }
-/*
-function rate (score) {
-
-    // Recollim la data en format ISO
-    const d = new Date()
-    let fecha:any = d.toISOString()
-
-    // Creem l'objecte acudit
-    let acudit:any = {
-        joke: contAcud.innerHTML,
-        score:  score,
-        date: fecha
-    }
-    
-    // Guardem l'objecte a l'array y es mostra
-    reportAcudits.push(acudit);
-    console.log(reportAcudits)
-
-}
-*/
-/*
-const API_URL = "https://icanhazdadjoke.com/";
-
-function mostrarAcudit() {
-
-    fetch('https://icanhazdadjoke.com/', {
-        headers: {
-            'Accept': 'application/json'
-        }})
-        .then(response => response.json())
-        .then(json => console.log(json));
-
-}
-*/
-/*
-const apiUrl:string = 'https://icanhazdadjoke.com/';
-let contAcud:any = document.getElementById('contenido_acudit');
-const option:any = {
-    
-    headers: {
-    'Accept': 'application/json'
-    }
-}
-
-function mostraAcudit() {
-
-    const accion = fetch(apiUrl, option)
-        .then((response) => response.json())
-        .then((data) => contAcud.innerHTML=data.joke);
-
-}
-*/ 
