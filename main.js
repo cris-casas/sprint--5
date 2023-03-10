@@ -63,10 +63,12 @@ var option = {
         'Accept': 'application/json'
     }
 };
+var apiUrl2 = 'https://api.chucknorris.io/jokes/random';
 var contAcud = document.getElementById('contenido_acudit');
 var contScore = document.getElementById('botones_score');
 var botAcud = document.getElementById('boton_acudit');
 var reportAcudits = [];
+//Dad jokes
 function dadesApi() {
     return __awaiter(this, void 0, void 0, function () {
         var respuesta, datos, err_1;
@@ -101,6 +103,41 @@ function dadesApi() {
         });
     });
 }
+//chuck Norris Jokes
+function dadesApi2() {
+    return __awaiter(this, void 0, void 0, function () {
+        var respuesta, datos, err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 5, , 6]);
+                    return [4 /*yield*/, fetch(apiUrl2)];
+                case 1:
+                    respuesta = _a.sent();
+                    if (!(respuesta.status === 200)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, respuesta.json()];
+                case 2:
+                    datos = _a.sent();
+                    contAcud.innerHTML = datos.value;
+                    contScore.innerHTML =
+                        '<button onclick="rate(1)">1</button>' +
+                            '<button onclick="rate(2)">2</button>' +
+                            '<button onclick="rate(3)">3</button>';
+                    botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
+                    return [3 /*break*/, 4];
+                case 3:
+                    console.log('Ha habido un error');
+                    _a.label = 4;
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    err_2 = _a.sent();
+                    console.log(err_2);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
+            }
+        });
+    });
+}
 var rating = 0;
 function rate(score) {
     rating = score;
@@ -122,5 +159,22 @@ function generaAcudit() {
     // Resetegem el valor del rating
     rating = null;
     // Recollim i mostrem els acudits de la API
-    dadesApi();
+    callRandomApis();
 }
+//Crida random a Api1 o Api2
+function callRandomApis() {
+    var random = Math.round(Math.random() * 10);
+    if (random > 5) {
+        dadesApi();
+    }
+    dadesApi2();
+}
+//alternar
+/*
+function showRandomJoke(){
+    let option = Math.round(Math.random() * 10);
+    let random= (option > 5)? chuckJoke() : loadJoke();
+  }
+  
+  document.getElementById("acudit")?.addEventListener("click", showRandomJoke);
+*/ 

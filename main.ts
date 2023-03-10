@@ -21,12 +21,15 @@ const option:any = {
     'Accept': 'application/json'
     }
 }
+const apiUrl2:string = 'https://api.chucknorris.io/jokes/random';
+
 const contAcud:any = document.getElementById('contenido_acudit');
 const contScore:any = document.getElementById('botones_score');
 const botAcud:any = document.getElementById('boton_acudit');
 
 const reportAcudits:any = [];
 
+//Dad jokes
 async function dadesApi () {
 
     try {
@@ -35,6 +38,30 @@ async function dadesApi () {
         if(respuesta.status === 200){
             const datos = await respuesta.json();
             contAcud.innerHTML = datos.joke;
+            contScore.innerHTML =
+            '<button onclick="rate(1)">1</button>'+
+            '<button onclick="rate(2)">2</button>'+
+            '<button onclick="rate(3)">3</button>';
+            botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
+
+        } else {
+            console.log('Ha habido un error')
+        }
+
+    } catch(err){
+        console.log(err);
+    }
+}
+
+//chuck Norris Jokes
+async function dadesApi2 () {
+
+    try {
+        const respuesta = await fetch(apiUrl2)
+
+        if(respuesta.status === 200){
+            const datos = await respuesta.json();
+            contAcud.innerHTML = datos.value;
             contScore.innerHTML =
             '<button onclick="rate(1)">1</button>'+
             '<button onclick="rate(2)">2</button>'+
@@ -75,6 +102,27 @@ function generaAcudit () {
     // Resetegem el valor del rating
     rating = null;
     // Recollim i mostrem els acudits de la API
-    dadesApi();
+    callRandomApis();
     
 }
+
+//Crida random a Api1 o Api2
+function callRandomApis() {
+
+    let random = Math.round(Math.random()*10);
+
+    if ( random > 5) {
+        dadesApi ()
+    } dadesApi2 ()
+
+}
+
+//alternar
+/*
+function showRandomJoke(){
+    let option = Math.round(Math.random() * 10);
+    let random= (option > 5)? chuckJoke() : loadJoke();
+  }
+  
+  document.getElementById("acudit")?.addEventListener("click", showRandomJoke);
+*/
