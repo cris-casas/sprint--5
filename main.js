@@ -38,10 +38,12 @@ var _this = this;
 var lat = 41.390205;
 var lon = 2.154007;
 var API_key = '3356a3346fdf41242690eef93099bd6f';
-var climaApi = "https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lon, "&appid=").concat(API_key);
+var climaApi = "https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lon, "&appid=").concat(API_key, "&units=metric");
 var contClima = document.getElementById('clima');
+var contTemp = document.getElementById('temperatura');
+var contIcon = document.getElementById('icono_weather');
 var mostraClima = function () { return __awaiter(_this, void 0, void 0, function () {
-    var respuesta, datos;
+    var respuesta, datos, temperatura, iconWeather;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, fetch(climaApi)];
@@ -50,8 +52,10 @@ var mostraClima = function () { return __awaiter(_this, void 0, void 0, function
                 return [4 /*yield*/, respuesta.json()];
             case 2:
                 datos = _a.sent();
-                contClima.innerHTML = datos.weather[0].description;
-                console.log(datos);
+                temperatura = datos.main.temp;
+                contTemp.innerHTML = "".concat((temperatura), "\u00BAC");
+                iconWeather = datos.weather[0]["icon"];
+                contIcon.src = "https://openweathermap.org/img/wn/".concat(iconWeather, "@2x.png");
                 return [2 /*return*/];
         }
     });
@@ -85,9 +89,9 @@ function dadesApi() {
                     datos = _a.sent();
                     contAcud.innerHTML = datos.joke;
                     contScore.innerHTML =
-                        '<button onclick="rate(1)">1</button>' +
-                            '<button onclick="rate(2)">2</button>' +
-                            '<button onclick="rate(3)">3</button>';
+                        '<button onclick="rate(1)"><i class="fa-2x fa-solid fa-face-frown"></i></button>' +
+                            '<button onclick="rate(2)"><i class="fa-2x fa-solid fa-face-meh"></i></button>' +
+                            '<button onclick="rate(3)"><i class="fa-2x fa-solid fa-face-laugh-squint"></i></button>';
                     botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
                     return [3 /*break*/, 4];
                 case 3:
@@ -120,9 +124,10 @@ function dadesApi2() {
                     datos = _a.sent();
                     contAcud.innerHTML = datos.value;
                     contScore.innerHTML =
-                        '<button onclick="rate(1)">1</button>' +
-                            '<button onclick="rate(2)">2</button>' +
-                            '<button onclick="rate(3)">3</button>';
+                        contScore.innerHTML =
+                            '<button onclick="rate(1)"><i class="fa-2x fa-solid fa-face-frown"></i></button>' +
+                                '<button onclick="rate(2)"><i class="fa-2x fa-solid fa-face-meh"></i></button>' +
+                                '<button onclick="rate(3)"><i class="fa-2x fa-solid fa-face-laugh-squint"></i></button>';
                     botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
                     return [3 /*break*/, 4];
                 case 3:

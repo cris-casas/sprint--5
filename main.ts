@@ -2,15 +2,19 @@
 const lat = 41.390205;
 const lon = 2.154007; 
 const API_key = '3356a3346fdf41242690eef93099bd6f';
-const climaApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`;
+const climaApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}&units=metric`;
 
 const contClima:any = document.getElementById('clima');
+const contTemp:any = document.getElementById('temperatura');
+const contIcon:any = document.getElementById('icono_weather');
 
 const mostraClima = async () => {
     const respuesta = await fetch(climaApi);
     const datos = await respuesta.json();
-    contClima.innerHTML = datos.weather[0].description;
-    console.log(datos);
+    let temperatura = datos.main.temp;
+    contTemp.innerHTML = `${(temperatura)}ºC`;
+    let iconWeather = datos.weather[0]["icon"];
+    contIcon.src = `https://openweathermap.org/img/wn/${iconWeather}@2x.png`;
 }
 
 mostraClima();
@@ -39,9 +43,9 @@ async function dadesApi () {
             const datos = await respuesta.json();
             contAcud.innerHTML = datos.joke;
             contScore.innerHTML =
-            '<button onclick="rate(1)">1</button>'+
-            '<button onclick="rate(2)">2</button>'+
-            '<button onclick="rate(3)">3</button>';
+            '<button onclick="rate(1)"><i class="fa-2x fa-solid fa-face-frown"></i></button>'+
+            '<button onclick="rate(2)"><i class="fa-2x fa-solid fa-face-meh"></i></button>'+
+            '<button onclick="rate(3)"><i class="fa-2x fa-solid fa-face-laugh-squint"></i></button>';
             botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
 
         } else {
@@ -63,9 +67,10 @@ async function dadesApi2 () {
             const datos = await respuesta.json();
             contAcud.innerHTML = datos.value;
             contScore.innerHTML =
-            '<button onclick="rate(1)">1</button>'+
-            '<button onclick="rate(2)">2</button>'+
-            '<button onclick="rate(3)">3</button>';
+            contScore.innerHTML =
+            '<button onclick="rate(1)"><i class="fa-2x fa-solid fa-face-frown"></i></button>'+
+            '<button onclick="rate(2)"><i class="fa-2x fa-solid fa-face-meh"></i></button>'+
+            '<button onclick="rate(3)"><i class="fa-2x fa-solid fa-face-laugh-squint"></i></button>';
             botAcud.innerHTML = '<button type="button" class="primary_button" onclick="generaAcudit()">Següent acudit</button>';
 
         } else {
@@ -116,6 +121,8 @@ function callRandomApis() {
     } dadesApi2 ()
 
 }
+
+
 
 //alternar
 /*
